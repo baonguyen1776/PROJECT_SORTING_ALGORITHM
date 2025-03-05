@@ -9,4 +9,4 @@ using namespace std;
 double insertionSortTime(int *a, int n);
 unsigned long long insertionSortCmp(int *a, int n);
 
-#endif INSERTIONSORT_H
+#endif 

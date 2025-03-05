@@ -9,4 +9,4 @@ using namespace std;
 double mergeSortTime(int *a, int n);
 unsigned long long mergeSortCmp(int *a, int n);
 
-#endif INSERTIONSORT_H
+#endif 

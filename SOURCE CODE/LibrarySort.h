@@ -7,6 +7,6 @@
 #include <MergeSort.h>
 #include <BinaryInsertionSort.h>
 #include <HeapSort.h>
+#include <QuickSortVer2.h>
 
-
-#endif LIBRARYSORT_H
+#endif 

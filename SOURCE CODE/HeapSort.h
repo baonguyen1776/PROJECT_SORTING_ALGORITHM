@@ -9,4 +9,4 @@ using namespace std;
 double heapSortTime(int *a, int n);
 unsigned long long heapSortCmp(int *a, int n);
 
-#endif HEAPSORT_h
+#endif 
