@@ -1,6 +1,6 @@
 #include <MergeSort.h>
 
-inline void merge(int *arr, int *leftArr, int *rightArr, int n) {
+inline void mergeT(int *arr, int *leftArr, int *rightArr, int n) {
     int nLeft = n / 2;
     int nRight = n - nLeft;
     int idxLeft = 0, idxRight = 0, idx = 0;
@@ -16,7 +16,7 @@ inline void merge(int *arr, int *leftArr, int *rightArr, int n) {
         arr[idx++] = leftArr[idxRight++];
 }
 
-inline void mergeSort(int *arr, int n) {
+inline void mergeSortT(int *arr, int n) {
     if (n <= 1)
         return;
     int nLeft = n / 2, nRight = n - nLeft;
@@ -27,9 +27,9 @@ inline void mergeSort(int *arr, int n) {
         arrRight[i - nLeft] = arr[i];
     
     // Call recursion to split array
-    mergeSort(arrLeft, nLeft);
-    mergeSort(arrRight, nRight);
-    merge(arr, arrLeft, arrRight, n);
+    mergeSortT(arrLeft, nLeft);
+    mergeSortT(arrRight, nRight);
+    mergeT(arr, arrLeft, arrRight, n);
 
     //Free up to memory
     delete[] arrLeft;
@@ -40,13 +40,13 @@ double mergeSortTime(int *a, int n) {
     clock_t start = clock();
 
     // Call merge-sort
-    mergeSort(a, n);
+    mergeSortT(a, n);
 
     clock_t end = clock();
     return (double)(end - start) / CLOCKS_PER_SEC;
 }
 
-inline void merge(int *arr, int *leftArr, int *rightArr, int n, unsigned long long count) {
+inline void mergeC(int *arr, int *leftArr, int *rightArr, int n, unsigned long long count) {
     int nLeft = n / 2;
     int nRight = n - nLeft;
     int idxLeft = 0, idxRight = 0, idx = 0;
@@ -62,7 +62,7 @@ inline void merge(int *arr, int *leftArr, int *rightArr, int n, unsigned long lo
         arr[idx++] = leftArr[idxRight++];
 }
 
-inline void mergeSort(int *arr, int n, unsigned long long count) {
+inline void mergeSortC(int *arr, int n, unsigned long long count) {
     if (++count && n <= 1)
         return;
     int nLeft = n / 2, nRight = n - nLeft;
@@ -73,9 +73,9 @@ inline void mergeSort(int *arr, int n, unsigned long long count) {
         arrRight[i - nLeft] = arr[i];
     
     // Call recursion to split array
-    mergeSort(arrLeft, nLeft);
-    mergeSort(arrRight, nRight);
-    merge(arr, arrLeft, arrRight, n, count);
+    mergeSortC(arrLeft, nLeft, count);
+    mergeSortC(arrRight, nRight, count);
+    mergeC(arr, arrLeft, arrRight, n, count);
 
     //Free up to memory
     delete[] arrLeft;
@@ -86,7 +86,7 @@ unsigned long long mergeSortCmp(int *a, int n) {
     unsigned long long numberOfCmp = 0;
 
     // Start merge-sort to counting comparision
-    mergeSort(a, n, numberOfCmp);
+    mergeSortC(a, n, numberOfCmp);
 
     return numberOfCmp;
 }

@@ -6,5 +6,7 @@
 #include <BubbleSort.h>
 #include <MergeSort.h>
 #include <BinaryInsertionSort.h>
+#include <HeapSort.h>
+
 
 #endif LIBRARYSORT_H
