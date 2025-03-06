@@ -25,7 +25,7 @@ double heapSortTime(int *a, int n) {
     swap(a[0], a[n - 1]);
     int heapSize = n - 1;
     while (heapSize > 1) {
-        heapRebuildT(a, 0, n);
+        heapRebuildT(a, 0, heapSize);
         heapSize--;
         swap(a[0], a[heapSize]);
     }
@@ -59,7 +59,7 @@ unsigned long long heapSortCmp(int *a, int n) {
     swap(a[0], a[n - 1]);
     int heapSize = n - 1;
     while (++numberOfCmp && heapSize > 1) {
-        heapRebuildC(a, 0, n, numberOfCmp);
+        heapRebuildC(a, 0, heapSize, numberOfCmp);
         heapSize--;
         swap(a[0], a[heapSize]);
     }
