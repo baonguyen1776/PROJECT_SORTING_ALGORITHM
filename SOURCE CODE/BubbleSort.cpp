@@ -1,7 +1,7 @@
 #include <BubbleSort.h>
 
 double bubblesorttime(int *a, int n) {
-    clock_t start = clock();
+    auto start = high_resolution_clock::now();
 
     //Start bubble sort
     for (int i = 1; i < n - 1; i++) {
@@ -11,8 +11,8 @@ double bubblesorttime(int *a, int n) {
         }
     }
 
-    clock_t end = clock();
-    return (double)(end - start) / CLOCKS_PER_SEC;
+    auto end = high_resolution_clock::now();
+    return duration<double>(end - start).count() * 1e6;
 }
 
 unsigned long long bubbleSortCmp(int *a, int n) {

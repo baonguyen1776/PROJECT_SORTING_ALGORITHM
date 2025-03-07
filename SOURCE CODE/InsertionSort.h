@@ -6,6 +6,7 @@
 #include <cmath>
 using namespace std;
 using namespace std::chrono;
+
 double insertionSortTime(int *a, int n);
 unsigned long long insertionSortCmp(int *a, int n);
 

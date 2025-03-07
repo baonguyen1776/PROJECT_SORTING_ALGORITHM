@@ -17,7 +17,7 @@ inline void heapRebuildT(int *arr, int start, int n) {
 }
 
 double heapSortTime(int *a, int n) {
-    clock_t start = clock();
+    auto start = high_resolution_clock::now();
 
     // start heap-sort:
     for (int i = (n - 1) / 2; i >= 0; i--) 
@@ -30,8 +30,8 @@ double heapSortTime(int *a, int n) {
         swap(a[0], a[heapSize]);
     }
 
-    clock_t end = clock();
-    return (double)(end - start) / CLOCKS_PER_SEC;
+    auto end = high_resolution_clock::now();
+    return duration<double>(end - start).count() * 1e6;
 }
 
 inline void heapRebuildC(int *arr, int start, int n, unsigned long long &count) {

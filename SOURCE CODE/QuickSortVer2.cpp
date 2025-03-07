@@ -59,13 +59,13 @@ inline void _QuickTime(int * arr, int first, int last) {
 }
 
 double quickSortVer2Time(int *a, int n) {
-    clock_t start = clock();
+    auto start = high_resolution_clock::now();
     
     //Call function 
     _QuickTime(a, 0, n - 1);
 
-    clock_t end = clock();
-    return (double)(end - start) / CLOCKS_PER_SEC;
+    auto end = high_resolution_clock::now();
+    return duration<double>(end - start).count() * 1e6; 
 }
 
 /*------------------------***----------------------*/

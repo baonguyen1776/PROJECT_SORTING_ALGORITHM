@@ -1,7 +1,7 @@
 #include <SelectionSort.h>
 
 double selectionSortTime(int *a, int n) {
-    clock_t start = clock();
+    auto start = high_resolution_clock::now();
 
     // start selection sort
     for (int i = 0; i < n - 1; i++) {
@@ -13,8 +13,8 @@ double selectionSortTime(int *a, int n) {
         swap(a[i], a[minIdx]);
     }
 
-    clock_t end = clock();
-    return (double)(end - start) / CLOCKS_PER_SEC;
+    auto end = high_resolution_clock::now();
+    return (duration<double>(end - start).count()) * 1e6;
 }
 
 unsigned long long selectionSortCmp(int *a, int n) {

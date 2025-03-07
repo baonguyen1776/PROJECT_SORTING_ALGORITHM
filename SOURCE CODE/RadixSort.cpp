@@ -32,13 +32,13 @@ inline void _RadixTime(int *arr, int n) {
 }
 
 double radixSortTime(int *a, int n) {
-    clock_t start = clock();
+    auto start = high_resolution_clock::now();
 
     //start sort:
     _RadixTime(a, n);
 
-    clock_t end = clock();
-    return (double)(end - start) / CLOCKS_PER_SEC;
+    auto end = high_resolution_clock::now();
+    return duration<double>(end - start).count() * 1e6;
 }
 
 /*---------------------------------------------*/

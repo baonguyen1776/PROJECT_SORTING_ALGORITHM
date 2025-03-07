@@ -1,7 +1,7 @@
 #include <InsertionSort.h>
 
 double insertionSortTime(int *a, int n) {
-    clock_t start = clock();
+    auto start = high_resolution_clock::now();
 
     // Start insertion sort
     for (int i = 1; i < n; i++) {
@@ -14,8 +14,8 @@ double insertionSortTime(int *a, int n) {
         a[j + 1] = keyValue;
     }
 
-    clock_t end = clock();
-    return (double)(end - start) / CLOCKS_PER_SEC;
+    auto end = high_resolution_clock::now();
+    return duration<double>(end - start).count() * 1e6;
 }
 
 unsigned long long insertionSortCmp(int *a, int n) {

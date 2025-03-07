@@ -1,7 +1,7 @@
 #include <BinaryInsertionSort.h>
 
 double binaryInsertionSortTime(int *a, int n) {
-    clock_t start = clock();
+    auto start = high_resolution_clock::now();
 
     //Start sort
     for (int i = 1; i < n; i++) {
@@ -19,8 +19,8 @@ double binaryInsertionSortTime(int *a, int n) {
         a[left] = keyValue;
     }
     
-    clock_t end = clock();
-    return (double)(end - start) / CLOCKS_PER_SEC;
+    auto end = high_resolution_clock::now();
+    return duration<double>(end - start).count() * 1e6;
 }   
 
 

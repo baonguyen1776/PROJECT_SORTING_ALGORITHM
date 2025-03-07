@@ -37,13 +37,13 @@ inline void mergeSortT(int *arr, int n) {
 }
 
 double mergeSortTime(int *a, int n) {
-    clock_t start = clock();
+    auto start = high_resolution_clock::now();
 
     // Call merge-sort
     mergeSortT(a, n);
 
-    clock_t end = clock();
-    return (double)(end - start) / CLOCKS_PER_SEC;
+    auto end = high_resolution_clock::now();
+    return duration<double>(end - start).count() * 1e6;
 }
 
 inline void mergeC(int *arr, int *leftArr, int *rightArr, int n, unsigned long long count) {
