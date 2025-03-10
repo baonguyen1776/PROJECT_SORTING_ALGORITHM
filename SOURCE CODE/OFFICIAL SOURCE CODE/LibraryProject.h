@@ -55,4 +55,7 @@ void GenerateSortedData(int a[], int n);
 void GenerateReverseData(int a[], int n);
 void GenerateData(int a[], int n, int dataType);
 
+//Processing commadline 
+void processArg(int argc, char *argv[]);
+
 #endif 
