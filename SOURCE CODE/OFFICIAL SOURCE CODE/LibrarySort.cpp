@@ -377,7 +377,7 @@ inline void _QuickCmp(int * arr, int first, int last, unsigned long long &count)
     }
 }
 
-void quickSortVer2Cmp(int *a, int n, unsigned long long &numberOfCmp) {
+void quickSortVer2Cmp(int a[], int n, unsigned long long &numberOfCmp) {
     _QuickCmp(a, 0, n - 1, numberOfCmp);
 }
 
@@ -637,7 +637,7 @@ void flashSortTime(int a[], int n) {
     delete[] bucket;
 }
 
-void flashSortCmp(int *a, int n, unsigned long long &numberOfCmp) {
+void flashSortCmp(int a[], int n, unsigned long long &numberOfCmp) {
     if (++numberOfCmp && n <= 1)
         return;
 
