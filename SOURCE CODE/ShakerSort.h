@@ -4,8 +4,6 @@
 #include <iostream>
 #include <chrono>
 #include <cmath>
-using namespace std;
-using namespace std::chrono;
 
 double shakerSortTime(int *a, int n);
 unsigned long long shakerSortCmp(int *a, int n);

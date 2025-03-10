@@ -1,5 +1,6 @@
 #include <FlashSort.h>
-
+using namespace std;
+using namespace std::chrono;
 // https://codelearn.io/sharing/flash-sort-thuat-toan-sap-xep-than-thanh
 
 inline int getBuc(int value, int minVal, int maxVal, int numClass) {

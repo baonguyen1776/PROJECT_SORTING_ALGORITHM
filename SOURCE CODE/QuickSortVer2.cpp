@@ -1,4 +1,6 @@
 #include <QuickSortVer2.h>
+using namespace std;
+using namespace std::chrono;
 
 inline int sortFirstMiddleLastT(int *arr, int first, int last) {
     int mid = (first + last) / 2;

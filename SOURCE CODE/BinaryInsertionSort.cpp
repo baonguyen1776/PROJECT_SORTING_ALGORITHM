@@ -1,4 +1,6 @@
 #include <BinaryInsertionSort.h>
+using namespace std;
+using namespace std::chrono;
 
 double binaryInsertionSortTime(int *a, int n) {
     auto start = high_resolution_clock::now();
@@ -22,7 +24,6 @@ double binaryInsertionSortTime(int *a, int n) {
     auto end = high_resolution_clock::now();
     return duration<double>(end - start).count() * 1e6;
 }   
-
 
 unsigned long long binaryInsertionSortCmp(int *a, int n) {
     unsigned long long numberOfCmp = 0;

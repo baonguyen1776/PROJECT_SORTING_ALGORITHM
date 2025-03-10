@@ -1,4 +1,6 @@
 #include <InsertionSort.h>
+using namespace std;
+using namespace std::chrono;
 
 double insertionSortTime(int *a, int n) {
     auto start = high_resolution_clock::now();

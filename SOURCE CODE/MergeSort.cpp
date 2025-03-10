@@ -1,4 +1,6 @@
 #include <MergeSort.h>
+using namespace std;
+using namespace std::chrono;
 
 inline void mergeT(int *arr, int *leftArr, int *rightArr, int n) {
     int nLeft = n / 2;

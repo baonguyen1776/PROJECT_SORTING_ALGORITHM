@@ -1,4 +1,6 @@
-#include <RadixSort.h> 
+#include <RadixSort.h>
+using namespace std;
+using namespace std::chrono; 
 
 inline void _RadixTime(int *arr, int n) {
     int maxVal = arr[0];

@@ -4,8 +4,6 @@
 #include <iostream>
 #include <chrono>
 #include <cmath>
-using namespace std;
-using namespace std::chrono;
 
 double selectionSortTime(int *a, int n);
 unsigned long long selectionSortCmp(int *a, int n);

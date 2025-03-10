@@ -1,8 +1,12 @@
-#include <iostream>
-#include <fstream>
-#include <cmath>
 #include <LibrarySort.h>
 using namespace std;
+using namespace std::chrono;
+
+vector<string> Algorithm = {"selection-sort", "insertion-sort", "bubble-sort", "binaryinsertion-sort", "shaker-sort", "shell-sort", "quick-sort", "merge-sort", "heap-sort", "radix-sort", "counting-sort", "flash-sort"};
+
+vector<string> outputParameters = {"-time", "-comp", "-both"};
+
+vector<string> intputOrder = {"-rand", "-nsorted", "-sorted", "-rev"};
 
 template <class T>
 void HoanVi(T &a, T &b)

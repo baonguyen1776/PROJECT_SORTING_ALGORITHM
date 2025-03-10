@@ -1,6 +1,8 @@
 #include <BubbleSort.h>
+using namespace std;
+using namespace std::chrono;
 
-double bubblesorttime(int *a, int n) {
+double bubbleSortTime(int *a, int n) {
     auto start = high_resolution_clock::now();
 
     //Start bubble sort
