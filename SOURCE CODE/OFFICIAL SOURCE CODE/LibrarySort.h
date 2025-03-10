@@ -43,11 +43,11 @@ void binaryInsertionSortCmp(int a[], int n, unsigned long long &numberOfCmp);
 void shakerSortCmp(int a[], int n, unsigned long long &numberOfCmp);
 void shellSortCmp(int a[], int n, unsigned long long &numberOfCmp);
 void heapSortCmp(int a[], int n, unsigned long long &numberOfCmp);
-void quickSortVer2Cmp(int *a, int n, unsigned long long &numberOfCmp);
+void quickSortVer2Cmp(int a[], int n, unsigned long long &numberOfCmp);
 void mergeSortCmp(int a[], int n, unsigned long long &numberOfCmp);
 void radixSortCmp(int arr[], int n, unsigned long long &numberOfCmp);
 void countingSortCmp(int a[], int n, unsigned long long &numberOfCmp);
-void flashSortCmp(int *a, int n, unsigned long long &numberOfCmp);
+void flashSortCmp(int a[], int n, unsigned long long &numberOfCmp);
 
 //All data generation from teacher
 void GenerateRandomData(int a[], int n);
