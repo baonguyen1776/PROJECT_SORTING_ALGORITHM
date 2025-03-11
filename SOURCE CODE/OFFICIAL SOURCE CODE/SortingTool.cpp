@@ -1,4 +1,4 @@
-#include <LibraryProject.h>
+#include "LibraryProject.h"
 using namespace std;
 using namespace std::chrono;
 
@@ -208,4 +208,6 @@ void processArg(int argc, char *argv[]) {
         cout << "--------------------\n";
         processSort(algos, checkTemp, _outputPrams);
     }
+
+    return;
 }
