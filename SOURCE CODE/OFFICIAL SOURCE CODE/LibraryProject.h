@@ -10,7 +10,7 @@
 #include <fstream>
 #include <stdlib.h>
 #include <time.h>
-
+using namespace std;
 struct Record {
     unsigned long long comparision;
     double time; //Đơn vị là micro giây
@@ -57,5 +57,10 @@ void GenerateData(int a[], int n, int dataType);
 
 //Processing commadline 
 void processArg(int argc, char *argv[]);
+bool checkDataIsNumber(string s);
+void generateAndWriteFile(string fileName, int n, int type);
+void processSort(vector<string> algos, string inputFile, string outputParams, int flag = 0);
+bool check(vector<string> v, char* argv);
+int findDataType(string s);
 
 #endif 
