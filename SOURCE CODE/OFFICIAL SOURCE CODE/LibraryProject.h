@@ -57,10 +57,5 @@ void GenerateData(int a[], int n, int dataType);
 
 //Processing commadline 
 void processArg(int argc, char *argv[]);
-bool checkDataIsNumber(string s);
-void generateAndWriteFile(string fileName, int n, int type);
-void processSort(vector<string> algos, string inputFile, string outputParams, int flag = 0);
-bool check(vector<string> v, char* argv);
-int findDataType(string s);
 
 #endif 

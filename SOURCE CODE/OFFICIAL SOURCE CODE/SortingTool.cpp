@@ -1,4 +1,6 @@
 #include "LibraryProject.h"
+#include "DataGenerator.cpp"
+#include "AlgoritmSort.cpp"
 using namespace std;
 using namespace std::chrono;
 
@@ -27,21 +29,21 @@ void generateAndWriteFile(string fileName, int n, int type) {
 }
 
 //Giả sử ta đã tách được dữ liệu đầu vào thì đây là hàm để xủ lý nó
-void processSort(vector<string> algos, string inputFile, string outputParams, int flag = 0) {
+void processSort(vector<string> algos, string inputFile, string outputParams, int flag) {
     //Đề phòng trường hợp quá nhiều thuật toán
     vector<Record> result;
 
+    // bước 1: thực hiện yêu cầu tiên quyết là đọc ghi dữ liệu vào file
+    ifstream fIn(inputFile);
+    int n;
+    fIn >> n;
+    int* arr = new int[n];
+    for (int j = 0; j < n; j++) 
+        fIn >> arr[j];
+    fIn.close();
+
     //Duyệt qua hết các thuật toán yêu cầu làm
     for (size_t i = 0; i < algos.size(); i++) {
-
-        // bước 1: thực hiện yêu cầu tiên quyết là đọc ghi dữ liệu vào file
-        ifstream fIn(inputFile);
-        int n;
-        fIn >> n;
-        int* arr = new int[n];
-        for (int j = 0; j < n; j++) 
-            fIn >> arr[i];
-        fIn.close();
 
         //bước 2: kiểm tra xem trong chuỗi vector algos gồm thuật toán gì và thực hiện nó
         string nameAlgo = algos[i];
@@ -79,9 +81,8 @@ void processSort(vector<string> algos, string inputFile, string outputParams, in
                 fOut << arr[i] << " ";
         }
 
-        delete[] arr;
     }
-
+    delete[] arr;
     // Bước 3 là ta xử lý việc in ra của thuật toán
     // Sẽ có 3 loại:
     //     Loại 1: Chỉ in ra 1 trong 2 dạng là -time và -comp
@@ -100,7 +101,7 @@ void processSort(vector<string> algos, string inputFile, string outputParams, in
     }
 
     if (outputParams == "-comp" || outputParams == "-both" || outputParams == "") {
-        cout << "Running time: ";
+        cout << "Comparisions: ";
         for (size_t i = 0; i < result.size(); i++) {
             cout << result[i].comparision;
             if (i < result.size() - 1)
@@ -111,9 +112,10 @@ void processSort(vector<string> algos, string inputFile, string outputParams, in
 
 }
 
-bool check(vector<string> v, char* argv) {
+bool check(const vector<string>& v, const char* argv) {
+    string argStr(argv);
     for (auto it : v) 
-        if (it == argv)
+        if (it == argStr)
             return true;
     return false;
 }
@@ -130,21 +132,24 @@ void processArg(int argc, char *argv[]) {
     string model = "";
     vector<string> algos;
     int inputSize = 0;
-    string _inputOrder = "", _outputPrams = "", checkTemp;
-    for (int i = 0; i < argc; i++) {
-        if (strcmp(argv[i], "-a")) 
+    string _inputOrder = "", _outputPrams = "", checkTemp = "";
+    for (int i = 1; i < argc; i++) {
+        if (strcmp(argv[i], "-a") == 0) 
             model = "-a";
-        else if (strcmp(argv[i], "-c"))
+        else if (strcmp(argv[i], "-c") == 0)
             model = "-c";
-        else if (check(algos, argv[i]))
-            algos.push_back(argv[i]);
+        else if (check(Algorithm, argv[i]))
+            algos.push_back(string(argv[i]));
+        else if (check(outputParameters, argv[i]))
+            _outputPrams = argv[i];
         else if (checkDataIsNumber(argv[i]))
             inputSize = stoi(argv[i]);
-        else if  (check(inputOrder, argv[i]))
+        else if (check(inputOrder, argv[i]))
             _inputOrder = argv[i];
-        else if (!i)
+        else
             checkTemp = argv[i];
     }
+
     if (model == "") {
         cout << "Error: No mode specified\n";
         return;
@@ -155,12 +160,11 @@ void processArg(int argc, char *argv[]) {
         return;
     }
 
-    if (model == "-a") {
+    if (model == "-a") 
         cout << "ALGORITHM MODE\n";
-    } else {
+    else 
         cout << "COMPARISON MODE\n";
-    }
-
+    
     cout << "Algorithms: ";
     for (auto it = algos.begin(); it < algos.end(); it++) {
         cout << *it;
@@ -178,7 +182,7 @@ void processArg(int argc, char *argv[]) {
             cout << "--------------------\n";
             int dataType = findDataType(_inputOrder);
             generateAndWriteFile("input.txt", inputSize, dataType);
-            processSort(algos, "input.txt", _outputPrams);
+            processSort(algos, "input.txt", _outputPrams, 0);
         } else {
             //Xu lý trường hợp nhiều input_X.txt
             for (size_t i = 0; i < inputOrder.size(); i++) {
@@ -206,7 +210,7 @@ void processArg(int argc, char *argv[]) {
         cout << "Input file: " << checkTemp << "\n";
         cout << "Input size: " << n << "\n";
         cout << "--------------------\n";
-        processSort(algos, checkTemp, _outputPrams);
+        processSort(algos, checkTemp, _outputPrams, 0);
     }
 
     return;
