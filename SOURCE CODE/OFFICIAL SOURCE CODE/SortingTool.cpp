@@ -1,6 +1,6 @@
 #include "LibraryProject.h"
 #include "DataGenerator.cpp"
-#include "AlgoritmSort.cpp"
+#include "AlgorithmSort.cpp"
 using namespace std;
 using namespace std::chrono;
 
@@ -79,6 +79,7 @@ void processSort(vector<string> algos, string inputFile, string outputParams, in
             fOut << n << endl;
             for (int i = 0; i < n; i++)
                 fOut << arr[i] << " ";
+            fOut.close();
         }
 
     }
@@ -103,7 +104,7 @@ void processSort(vector<string> algos, string inputFile, string outputParams, in
     if (outputParams == "-comp" || outputParams == "-both" || outputParams == "") {
         cout << "Comparisions: ";
         for (size_t i = 0; i < result.size(); i++) {
-            cout << result[i].comparision;
+            cout << result[i].comparison;
             if (i < result.size() - 1)
                 cout << " | ";
         }
@@ -127,12 +128,23 @@ int findDataType(string s) {
     return -1;
 }
 
+string convertInputOrder(string s) {
+    if (s == "-rand") 
+        return "Randomize";
+    if (s == "-nsorted")
+        return "Nearly Sorted";
+    if (s == "sorted")
+        return "Sorted";
+    return "Reversed";
+}
+
 // Cuối cùng là hàm dùng để xử lý lệnh commandline rồi ném nó vào các hàm trên
-void processArg(int argc, char *argv[]) {
+void processArg(int argc, char* argv[]) {
     string model = "";
     vector<string> algos;
     int inputSize = 0;
     string _inputOrder = "", _outputPrams = "", checkTemp = "";
+
     for (int i = 1; i < argc; i++) {
         if (strcmp(argv[i], "-a") == 0) 
             model = "-a";
@@ -178,21 +190,22 @@ void processArg(int argc, char *argv[]) {
         cout << "Input size: " << inputSize << endl;
         if (_inputOrder != "") {
             //Đây là trường hợp chỉ có 1
-            cout << "Input order: " << _inputOrder << endl;
+            cout << "Input order: " << convertInputOrder(_inputOrder) << endl;
             cout << "--------------------\n";
             int dataType = findDataType(_inputOrder);
             generateAndWriteFile("input.txt", inputSize, dataType);
             processSort(algos, "input.txt", _outputPrams, 0);
         } else {
             //Xu lý trường hợp nhiều input_X.txt
+            cout << endl;
             for (size_t i = 0; i < inputOrder.size(); i++) {
-                cout << "Input order: " << _inputOrder << endl;
+                cout << "Input order: " << convertInputOrder(inputOrder[i]) << endl;
                 cout << "--------------------\n";
                 int j;
                 if (i == 0) j = 1; //random
-                if (i == 1) j = 3; //sorted
-                if (i == 2) j = 4; //rev
-                if (i == 3) j = 2; //nsorted
+                if (i == 1) j = 2; //nsorted
+                if (i == 2) j = 3; //sorted
+                if (i == 3) j = 4; //rev
                 generateAndWriteFile("input_" + to_string(j) + ".txt", inputSize, i);
                 processSort(algos, "input_" + to_string(j) + ".txt", _outputPrams, 1);
             }

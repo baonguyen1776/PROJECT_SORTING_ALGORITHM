@@ -1,4 +1,4 @@
-#ifndef LIBRARYSORT_H
+#ifndef LIBRARYSORT_H 
 #define LIBRARYSORT_H
 
 #include <iostream>
@@ -11,8 +11,9 @@
 #include <stdlib.h>
 #include <time.h>
 using namespace std;
+
 struct Record {
-    unsigned long long comparision;
+    unsigned long long comparison;
     double time; //Đơn vị là micro giây
 };
 

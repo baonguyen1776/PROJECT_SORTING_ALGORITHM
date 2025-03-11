@@ -1,0 +1,15 @@
+format
+    command1: ./main.exe -a [Algorithm] [Input filename] [Output paramete(s)]
+        Ex: ./main.exe -a selection-sort input.txt -both
+
+    command2: ./main.exe -a [Algorithm] [Input size] [Input Order] [Output paramete(s)]
+        Ex ./main.exe -a selection-sort 10000 -rand -time
+    
+    command3: ./main.exe -a [Algorithm] [Input size][Output paramete(s)]
+        Ex: ./main.exe -a selection-sort 10000 -both
+
+    command4: ./main.exe -c [Algorithm1] [Algorithm2] [Input filename] 
+        Ex: ./main.exe -c heap-sort merge-sort input.txt
+    
+    command5: ./main.exe -c [Algorithm1] [Algorithm2] [Input size] [Input order]
+        Ex: ./main.exe -c heap-sort quick-sort 10000 -rand

@@ -9,14 +9,14 @@ void copyArray(int oldArr[], int newArr[], int n) {
 
 Record getRecord(int arr[], int n, void (*sortFunctionTime)(int [], int), void (*sortFunctionComp) (int [], int, unsigned long long &)) {
     Record data;
-    data.comparision = data.time = 0;
+    data.comparison = data.time = 0;
     int* newArr = new int[n];
     copyArray(arr, newArr, n);
     auto start = high_resolution_clock::now();
     sortFunctionTime(arr, n);
     auto end = high_resolution_clock::now();
-    data.time = duration<double>(end - start).count() * 1e6;
-    sortFunctionComp(newArr, n, data.comparision);
+    data.time = duration<double>(end - start).count() * 1e3;
+    sortFunctionComp(newArr, n, data.comparison);
     delete[] newArr;
     return data;
 }
@@ -473,31 +473,37 @@ void radixSortTime(int arr[], int n) {
         if (arr[i] > maxVal)
             maxVal = arr[i];
 
-    //find the maximun muber of digits
-    int digits = 0, div;
-    do {
+    // Tìm số chữ số lớn nhất
+    int digits = 0;
+    for (int div = maxVal; div > 0; div /= 10)
         digits++;
-        div = maxVal / pow(10, digits);
-    } while (div > 0);
     int *tempArr[10];
     for (int i = 0; i < 10; i++)
         tempArr[i] = new int[n];
-    int tempCount[10] = {0};
+    int tempCount[10];
 
-    //form groups of number and combine groups
+    // Sắp xếp theo từng chữ số
+    int exponent = 1;
     for (int i = 0; i < digits; i++) {
-        int exponent = pow(10, i);
+        memset(tempCount, 0, sizeof(tempCount));
+
         for (int j = 0; j < n; j++) {
             int idx = (arr[j] / exponent) % 10;
             tempArr[idx][tempCount[idx]++] = arr[j];
         }
+
         int idx = 0;
         for (int j = 0; j < 10; j++)
             for (int k = 0; k < tempCount[j]; k++)
                 arr[idx++] = tempArr[j][k];
-    }
-}
 
+        exponent *= 10;
+    }
+
+    // Giải phóng bộ nhớ
+    for (int i = 0; i < 10; i++)
+        delete[] tempArr[i];
+}
 
 void radixSortCmp(int arr[], int n, unsigned long long &numberOfCmp) {
     int maxVal = arr[0];
@@ -505,30 +511,40 @@ void radixSortCmp(int arr[], int n, unsigned long long &numberOfCmp) {
         if (arr[i] > maxVal)
             maxVal = arr[i];
 
-    //find the maximun muber of digits
-    int digits = 0, div;
-    do {
+    // Tìm số chữ số lớn nhất
+    int digits = 0;
+    for (int div = maxVal; ++numberOfCmp && div > 0; div /= 10)
         digits++;
-        div = maxVal / pow(10, digits);
-    } while (++numberOfCmp && div > 0);
-    int *tempArr[10];
-    for (int i = 0; ++numberOfCmp &&  i < 10; i++)
-        tempArr[i] = new int[n];
-    int tempCount[10] = {0};
 
-    //form groups of number and combine groups
+    int *tempArr[10];
+    for (int i = 0; ++numberOfCmp && i < 10; i++)
+        tempArr[i] = new int[n];
+
+    int tempCount[10];
+
+    // Sắp xếp theo từng chữ số
+    int exponent = 1;
     for (int i = 0; ++numberOfCmp && i < digits; i++) {
-        int exponent = pow(10, i);
+        memset(tempCount, 0, sizeof(tempCount));
+
         for (int j = 0; ++numberOfCmp && j < n; j++) {
             int idx = (arr[j] / exponent) % 10;
             tempArr[idx][tempCount[idx]++] = arr[j];
         }
+
         int idx = 0;
         for (int j = 0; ++numberOfCmp && j < 10; j++)
             for (int k = 0; ++numberOfCmp && k < tempCount[j]; k++)
                 arr[idx++] = tempArr[j][k];
+
+        exponent *= 10;
     }
+
+    // Giải phóng bộ nhớ
+    for (int i = 0; ++numberOfCmp && i < 10; i++)
+        delete[] tempArr[i];
 }
+
 
 //-----------------------------------------------
 //11. Counting Sort
