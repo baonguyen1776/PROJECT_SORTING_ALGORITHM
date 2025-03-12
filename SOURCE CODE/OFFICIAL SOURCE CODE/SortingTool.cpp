@@ -133,7 +133,7 @@ string convertInputOrder(string s) {
         return "Randomize";
     if (s == "-nsorted")
         return "Nearly Sorted";
-    if (s == "sorted")
+    if (s == "-sorted")
         return "Sorted";
     return "Reversed";
 }

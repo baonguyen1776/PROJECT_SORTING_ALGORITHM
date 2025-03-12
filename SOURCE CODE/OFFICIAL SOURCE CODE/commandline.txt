@@ -12,4 +12,4 @@ format
         Ex: ./main.exe -c heap-sort merge-sort input.txt
     
     command5: ./main.exe -c [Algorithm1] [Algorithm2] [Input size] [Input order]
-        Ex: ./main.exe -c heap-sort quick-sort 10000 -rand
+        Ex: ./main.exe -c heap-sort quick-sort 10000 -rand 
