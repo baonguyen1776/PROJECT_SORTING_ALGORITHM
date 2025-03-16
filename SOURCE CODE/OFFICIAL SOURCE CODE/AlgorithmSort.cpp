@@ -589,7 +589,7 @@ void flashSortTime(int a[], int n) {
         return;
     
     int minVal = a[0], maxVal = a[0];
-    int numClass = (int)(0.45 * n);
+    int numClass = (int)(sqrt(n));
     for (int i = 1; i < n; i++) {
         if (maxVal < a[i])
             maxVal = a[i];
@@ -600,7 +600,7 @@ void flashSortTime(int a[], int n) {
         return;
     
     // step1 create bucket
-    int* bucket = new int[numClass]{0};
+    int* bucket = new int[numClass + 1]{0};
     for (int i = 0; i < n; i++)
         ++bucket[_getBuc(a[i], minVal, maxVal, numClass)];
     for (int i = 1; i < numClass; i++)
@@ -644,7 +644,7 @@ void flashSortCmp(int a[], int n, unsigned long long &numberOfCmp) {
         return;
 
     int minVal = a[0], maxVal = a[0];
-    int numClass = (int)(0.45 * n);
+    int numClass = (int)(sqrt(n));
     for (int i = 1; ++numberOfCmp && i < n; i++) {
         if (++numberOfCmp && maxVal < a[i])
             maxVal = a[i];
@@ -655,7 +655,7 @@ void flashSortCmp(int a[], int n, unsigned long long &numberOfCmp) {
         return;
 
     // step1 create bucket
-    int* bucket = new int[numClass]{0};
+    int* bucket = new int[numClass + 1]{0};
     for (int i = 0; ++numberOfCmp && i < n; i++)
         ++bucket[_getBuc(a[i], minVal, maxVal, numClass)];
     for (int i = 1; ++numberOfCmp && i < numClass; i++)
