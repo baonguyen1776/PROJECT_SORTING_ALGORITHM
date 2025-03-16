@@ -26,7 +26,6 @@ void generateAndWriteFile(string fileName, int n, int type) {
     for (int i = 0; i < n; i++)
         fOut << newArr[i] << " ";
     fOut.close();
-    delete[] newArr;
 }
 
 //Giả sử ta đã tách được dữ liệu đầu vào thì đây là hàm để xủ lý nó

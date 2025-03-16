@@ -135,46 +135,58 @@ void binaryInsertionSortCmp(int a[], int n, unsigned long long &numberOfCmp) {
 //5 Shaker Sort
 
 void shakerSortTime(int a[], int n) {
-    int left, right, k;
-    left = 0;
-    right = n - 1;
-    k = 0;
-    while(left < right) {
-        for( int i = left;i < right; i++)
-            if(a[i] > a[i + 1]) {
+    int left = 0, right = n - 1, k = 0;
+    while (left < right) {
+        bool isSwapped = false;
+        for (int i = left; i < right; i++) {
+            if (a[i] > a[i + 1]) {
                 swap(a[i], a[i + 1]);
                 k = i;
+                isSwapped = true;
             }
+        }
+        if (!isSwapped) break;
         right = k;
 
-        for( int i = right;i > left; i--)
-            if(a[i] < a[i - 1]) {
+        isSwapped = false;
+        for (int i = right; i > left; i--) {
+            if (a[i] < a[i - 1]) {
                 swap(a[i], a[i - 1]);
                 k = i;
+                isSwapped = true;
             }
+        }
+        if (!isSwapped) break;
         left = k;
     }
 }
 
 void shakerSortCmp(int a[], int n, unsigned long long &numberOfCmp) {
-    int left, right, k;
-    left = 0;
-    right = n - 1;
-    k = 0;
-    while(++numberOfCmp && left < right) {
-        for( int i = left;++numberOfCmp && i < right; i++)
-            if(++numberOfCmp && a[i] > a[i + 1]) {
+    int left = 0, right = n - 1, k = 0;
+    while (++numberOfCmp && left < right) {
+        bool isSwapped = false;
+        for (int i = left; ++numberOfCmp && i < right; i++) {
+            if (++numberOfCmp && a[i] > a[i + 1]) {
                 swap(a[i], a[i + 1]);
                 k = i;
+                isSwapped = true;
             }
-        right = k;
 
-        for( int i = right;++numberOfCmp && i > left; i--)
-            if(++numberOfCmp && a[i] < a[i - 1]) {
-                swap(a[i], a[i - 1]);
-                k = i;
+            if (++numberOfCmp && !isSwapped) break;
+            right = k;
+
+            isSwapped = false;
+            for (int i = right; ++numberOfCmp && i > left; i--) {
+                if (++numberOfCmp && a[i] < a[i - 1]) {
+                    swap(a[i], a[i - 1]);
+                    k = i;
+                    isSwapped = true;
+                }
             }
-        left = k;
+
+            if (++numberOfCmp && !isSwapped) break;
+            left = k;
+        }
     }
 }
 
