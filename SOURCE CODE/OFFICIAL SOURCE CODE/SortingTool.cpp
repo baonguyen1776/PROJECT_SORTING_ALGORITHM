@@ -26,7 +26,6 @@ void generateAndWriteFile(string fileName, int n, int type) {
     for (int i = 0; i < n; i++)
         fOut << newArr[i] << " ";
     fOut.close();
-    delete[] newArr;
 }
 
 //Giả sử ta đã tách được dữ liệu đầu vào thì đây là hàm để xủ lý nó
@@ -34,17 +33,16 @@ void processSort(vector<string> algos, string inputFile, string outputParams, in
     //Đề phòng trường hợp quá nhiều thuật toán
     vector<Record> result;
 
-    // bước 1: thực hiện yêu cầu tiên quyết là đọc ghi dữ liệu vào file
-    ifstream fIn(inputFile);
-    int n;
-    fIn >> n;
-    int* arr = new int[n];
-    for (int j = 0; j < n; j++) 
-        fIn >> arr[j];
-    fIn.close();
-
     //Duyệt qua hết các thuật toán yêu cầu làm
     for (size_t i = 0; i < algos.size(); i++) {
+        // bước 1: thực hiện yêu cầu tiên quyết là đọc ghi dữ liệu vào file
+        ifstream fIn(inputFile);
+        int n;
+        fIn >> n;
+        int* arr = new int[n];
+        for (int j = 0; j < n; j++) 
+            fIn >> arr[j];
+        fIn.close();
 
         //bước 2: kiểm tra xem trong chuỗi vector algos gồm thuật toán gì và thực hiện nó
         string nameAlgo = algos[i];
@@ -82,9 +80,9 @@ void processSort(vector<string> algos, string inputFile, string outputParams, in
                 fOut << arr[i] << " ";
             fOut.close();
         }
-
+        delete[] arr;
     }
-    delete[] arr;
+    
     // Bước 3 là ta xử lý việc in ra của thuật toán
     // Sẽ có 3 loại:
     //     Loại 1: Chỉ in ra 1 trong 2 dạng là -time và -comp
